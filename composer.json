@@ -1,0 +1,25 @@
+{
+    "name": "tssaltan/wp-its-captcha-puzzle",
+    "description": "[WP] It's Captcha Puzzle",
+    "type": "plugin",
+    "authors":
+    [
+        {
+            "name": "tssaltan",
+            "email": "i@tssaltan.top"
+        }
+    ],
+    "minimum-stability": "dev",
+    "repositories":
+    [
+        {
+            "type": "git",
+            "url": "https://github.com/TsSaltan/its-api"
+        }
+    ],
+    "require":
+    {
+        "php": ">=7.1",
+        "tssaltan/its-api": "dev-main"
+    }
+}

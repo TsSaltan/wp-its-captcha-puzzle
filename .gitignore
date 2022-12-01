@@ -1,0 +1,6 @@
+# Ignore all framework files
+/composer.lock
+/vendor/*
+
+# Instead of your project files 
+!/composer.json
