@@ -17,4 +17,7 @@ include "classes/wp-captcha-puzzle.php";
 include "classes/wp-captcha-puzzle-configurer.php";
 
 $captchaPuzzle = new WPCaptchaPuzzle;
-$captchaPuzzleCfg = new WPCaptchaPuzzleConfigurer($captchaPuzzle);
+
+if(is_admin()){
+    new WPCaptchaPuzzleConfigurer($captchaPuzzle);
+}
