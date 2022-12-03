@@ -23,6 +23,12 @@ class WPCaptchaPuzzle {
         } else {
             $this->api = new itsAPI();
         }
+
+        load_textdomain('captchapuzzle', CP_PLUGIN_DIR . '/locale/captchapuzzle-ru_RU.mo' );
+
+        add_action('plugins_loaded', function(){
+            load_plugin_textdomain('captchapuzzle', false, CP_PLUGIN_DIR . '/locale' );
+        });
     }
 
     private function loadAPIKeys(){

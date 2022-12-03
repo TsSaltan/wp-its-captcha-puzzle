@@ -13,7 +13,7 @@ class WPCaptchaPuzzleConfigurer {
 
         if(!$this->captchaPuzzle->isInstalled()){
             add_action('admin_notices', function(){ 
-                $this->htmlNotice('error', '<strong>It\'s Captcha Puzzle</strong>: ' . sprintf(__( 'Open %s for complete installation', 'cp-plugin'), '<a href="./options-general.php?page=' . WPCaptchaPuzzle::CONFIG_KEY . '">' . __('plugin config page', 'cp-plugin') . '</a>'));
+                $this->htmlNotice('error', '<strong>It\'s Captcha Puzzle</strong>: ' . sprintf(__( 'Open %s for complete installation', 'captchapuzzle'), '<a href="./options-general.php?page=' . WPCaptchaPuzzle::CONFIG_KEY . '">' . __('plugin config page', 'captchapuzzle') . '</a>'));
             });
         }
 
@@ -46,8 +46,8 @@ class WPCaptchaPuzzleConfigurer {
 
             add_settings_section(self::CONFIG_SECTION, 'Plugin params', null, self::CONFIG_PAGE);
 
-            add_settings_field('api_public_key', __('Public key', 'cp-plugin'), function(){ $this->htmlInputConfigField('public_key', $this->captchaPuzzle->getPublicKey()); }, self::CONFIG_PAGE, self::CONFIG_SECTION);
-            add_settings_field('api_private_key', __('Private key', 'cp-plugin'), function(){ $this->htmlInputConfigField('private_key', $this->captchaPuzzle->getPrivateKey()); }, self::CONFIG_PAGE, self::CONFIG_SECTION);
+            add_settings_field('api_public_key', __('Public key', 'captchapuzzle'), function(){ $this->htmlInputConfigField('public_key', $this->captchaPuzzle->getPublicKey()); }, self::CONFIG_PAGE, self::CONFIG_SECTION);
+            add_settings_field('api_private_key', __('Private key', 'captchapuzzle'), function(){ $this->htmlInputConfigField('private_key', $this->captchaPuzzle->getPrivateKey()); }, self::CONFIG_PAGE, self::CONFIG_SECTION);
         });
     }
 
