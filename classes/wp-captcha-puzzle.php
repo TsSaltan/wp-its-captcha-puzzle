@@ -60,7 +60,6 @@ class WPCaptchaPuzzle {
     public function testAPIKeys(): array {
         $result = ['public' => 'fail', 'private' => 'fail'];
         $q = $this->api->get('whoami');
-        var_dump( $q); die;
         if(isset($q['result']) && $q['result'] == 'success' && isset($q['response'])){
             $result['public'] = (isset($q['response']['token']['public_key_valid']) && $q['response']['token']['public_key_valid']) ? 'ok' : 'fail';
             $result['private'] = (isset($q['response']['token']['private_key_valid']) && $q['response']['token']['private_key_valid']) ? 'ok' : 'fail';
