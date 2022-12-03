@@ -13,7 +13,7 @@ class WPCaptchaPuzzleConfigurer {
 
         if(!$this->captchaPuzzle->isInstalled()){
             add_action('admin_notices', function(){ 
-                $this->htmlNotice('error', '<strong>It\'s Captcha Puzzle</strong>: Open plugin <a href="options-general.php?page=captcha-puzzle-settings">config page</a> for complete installation.');
+                $this->htmlNotice('error', '<strong>It\'s Captcha Puzzle</strong>: Open plugin <a href="./options-general.php?page=' . WPCaptchaPuzzle::CONFIG_KEY . '">config page</a> for complete installation.');
             });
         }
 
@@ -26,6 +26,22 @@ class WPCaptchaPuzzleConfigurer {
         });
 
         add_action('admin_init', function(){
+
+            if(isset($_POST['action'])){
+                switch($_POST['action']){
+                    case 'generate_its_keys':
+                        $result = $this->captchaPuzzle->generateAPIKeys();
+                        $this->redirectConfigPage(['result' => ($result ? 'success' : 'fail')]);
+                        break;
+
+                    case 'testing_its_keys':
+                        $result = $this->captchaPuzzle->testAPIKeys();
+                        $this->redirectConfigPage(['testing-results' => $result]);
+                        break;
+                }
+            }
+
+
             register_setting(self::CONFIG_SECTION, WPCaptchaPuzzle::CONFIG_KEY, null);
             //register_setting(self::CONFIG_SECTION, WPCaptchaPuzzle::CONFIG_KEY, [$this, 'sanitizeInputConfigs']);
 
@@ -34,9 +50,13 @@ class WPCaptchaPuzzleConfigurer {
             add_settings_field('api_public_key', 'Публичный ключ', function(){ $this->htmlInputConfigField('public_key', $this->captchaPuzzle->getPublicKey()); }, self::CONFIG_PAGE, self::CONFIG_SECTION);
             add_settings_field('api_private_key', 'Приватный ключ', function(){ $this->htmlInputConfigField('private_key', $this->captchaPuzzle->getPrivateKey()); }, self::CONFIG_PAGE, self::CONFIG_SECTION);
         });
-
     }
 
+    public function redirectConfigPage(array $params = []){
+        $params['page'] = WPCaptchaPuzzle::CONFIG_KEY;
+        header('Location: ./options-general.php?' .  http_build_query($params));
+        die;
+    }
 
     /**
      * @param string $type = updated|error

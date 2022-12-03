@@ -15,7 +15,8 @@ if (!defined("ABSPATH")) exit;
 include "vendor/autoload.php";
 include "classes/wp-captcha-puzzle.php";
 include "classes/wp-captcha-puzzle-configurer.php";
-
+    
+global $captchaPuzzle;
 $captchaPuzzle = new WPCaptchaPuzzle;
 
 if(is_admin()){
